@@ -1,0 +1,28 @@
+{% extends "admin/change_list.html" %}
+{% block object-tools-items %}
+    {{ block.super }}
+    <li>
+        <a class="addlink" onclick='fetchData("/admin/fill_data")'> Fill data </a>
+    </li>
+    <li>
+        <a class="deletelink" onclick='fetchData("/admin/delete_data")'> Delete all data</a>
+    </li>
+
+    <script> 
+        async function fetchData(url) {
+            try {
+              const response = await fetch(url);
+          
+              if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+          
+              const data = await response.text();
+              alert(data);
+            } catch (error) {
+              alert('Error: ' + data);
+            }
+            location.reload(true);
+          }
+    </script>
+{% endblock %}
